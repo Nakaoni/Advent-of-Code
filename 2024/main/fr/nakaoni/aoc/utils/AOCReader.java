@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 public class AOCReader {
     /**
@@ -12,7 +13,7 @@ public class AOCReader {
      * 
      * @throws IOException
      */
-    public static String read(Path path) throws IOException
+    public static Stream<String> read(Path path) throws IOException
     {
         boolean isReadableFile = Files.isReadable(path);
 
@@ -20,6 +21,6 @@ public class AOCReader {
             throw new FileNotFoundException();
         }
 
-        return Files.readString(path);
+        return Files.lines(path);
     }
 }
