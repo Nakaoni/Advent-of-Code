@@ -14,3 +14,9 @@ Stack:
 - Java version: 17
 - Build system: Makefile (I will not use Maven or Gradle as I want to learn from scratch first)
 - Testing framework: jUnit5
+
+### Settings
+
+- Classpath:
+    - 2024/main
+    - 2024/test

@@ -15,7 +15,7 @@ public class Day01Test {
     String EXAMPLE_FILE_PATH = "day01/example.txt";
 
     @Test
-    public void testPrintResult() throws Exception {
+    public void testPart1Response() throws Exception {
         String expected = "11";
 
         Stream<String> input = AOCReader.read(Paths.get(AdventOfCodeApplicationTest.BASE_TEST_FOLDER_PATH, EXAMPLE_FILE_PATH));
@@ -26,5 +26,4 @@ public class Day01Test {
 
         assertEquals(expected, result);
     }
-
 }

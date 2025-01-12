@@ -18,7 +18,7 @@ public class AOCReader {
         boolean isReadableFile = Files.isReadable(path);
 
         if (!isReadableFile) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("File is not readable.");
         }
 
         return Files.lines(path);
