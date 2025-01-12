@@ -6,10 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class AOCReader {
-    public static String read(String filepath) throws IOException
+    /**
+     * @param Path path
+     * @return String
+     * 
+     * @throws IOException
+     */
+    public static String read(Path path) throws IOException
     {
-        Path path = Path.of(filepath);
-
         boolean isReadableFile = Files.isReadable(path);
 
         if (!isReadableFile) {

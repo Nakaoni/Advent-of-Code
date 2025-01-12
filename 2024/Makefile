@@ -1,7 +1,8 @@
 CC=javac
 SRC=AdventOfCodeApplication.java
 CLASS=AdventOfCodeApplication
-CLASS_PATH=fr/nakaoni/aoc
+CLASS_PATH=main/fr/nakaoni/aoc
+TEST_CLASS_PATH=test/fr/nakaoni/aoc
 PACKAGE=fr.nakaoni.aoc
 VERSION=17
 
