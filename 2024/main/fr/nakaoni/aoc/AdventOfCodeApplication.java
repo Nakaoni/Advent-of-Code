@@ -11,8 +11,8 @@ public class AdventOfCodeApplication {
     public static void main(String[] args) {
         try {
             DayResponse day01 = new Day01();
-
             printResponse(day01.getClass().getSimpleName(), day01.getPart1Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day01/assets/input.txt"))));
+            printResponse(day01.getClass().getSimpleName(), day01.getPart2Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day01/assets/input.txt"))));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
