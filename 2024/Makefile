@@ -1,4 +1,3 @@
-CC=javac
 SRC=AdventOfCodeApplication.java
 CLASS=AdventOfCodeApplication
 CLASS_PATH=main/fr/nakaoni/aoc
@@ -8,10 +7,10 @@ VERSION=17
 
 all: run
 
-.PHONY: build run clean
+.PHONY: build run clean test
 
 build:
-	$(CC) -d . --target $(VERSION) $(CLASS_PATH)/$(SRC)
+	javac -d . --target $(VERSION) $(CLASS_PATH)/$(SRC)
 
 run: build
 	java --class-path . $(PACKAGE).$(CLASS)

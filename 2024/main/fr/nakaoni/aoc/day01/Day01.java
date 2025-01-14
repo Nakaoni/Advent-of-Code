@@ -13,7 +13,6 @@ public class Day01 implements DayResponse {
 
     @Override
     public String getPart1Response(Stream<String> input) throws Exception {
-        
         List<Integer> leftNumbers = new ArrayList<>();
         List<Integer> rightNumbers = new ArrayList<>();
 
@@ -41,7 +40,6 @@ public class Day01 implements DayResponse {
     }
 
     public String getPart2Response(Stream<String> input) throws Exception {
-        
         List<Integer> leftNumbers = new ArrayList<>();
         Map<Integer, Integer> rightNumbers = new HashMap<>();
 
@@ -67,5 +65,4 @@ public class Day01 implements DayResponse {
 
         return String.valueOf(sum);
     }
-
 }
