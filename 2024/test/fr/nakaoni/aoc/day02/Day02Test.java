@@ -26,4 +26,17 @@ public class Day02Test {
 
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testPart2Response() throws Exception {
+        String expected = "4";
+
+        Stream<String> input = AOCReader.read(Paths.get(AdventOfCodeApplicationTest.BASE_TEST_FOLDER_PATH, EXAMPLE_FILE_PATH));
+
+        DayResponse day = new Day02();
+
+        String result = day.getPart2Response(input);
+
+        assertEquals(expected, result);
+    }
 }
