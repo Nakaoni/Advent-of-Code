@@ -7,7 +7,7 @@ import fr.nakaoni.aoc.day02.Day02;
 import fr.nakaoni.aoc.utils.AOCReader;
 
 public class AdventOfCodeApplication {
-    public static final String BASE_FOLDER_PATH = "main/fr/nakaoni/aoc";
+    public static final String BASE_FOLDER_PATH = "2024/main/fr/nakaoni/aoc";
 
     public static void main(String[] args) {
         try {
@@ -19,6 +19,7 @@ public class AdventOfCodeApplication {
 
             DayResponse day02 = new Day02();
             printResponse(day02.getClass().getSimpleName(), day02.getPart1Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day02/assets/input.txt"))));
+            printResponse(day02.getClass().getSimpleName(), day02.getPart2Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day02/assets/input.txt"))));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
