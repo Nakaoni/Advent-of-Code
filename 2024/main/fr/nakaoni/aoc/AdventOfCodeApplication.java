@@ -7,7 +7,7 @@ import fr.nakaoni.aoc.day02.Day02;
 import fr.nakaoni.aoc.utils.AOCReader;
 
 public class AdventOfCodeApplication {
-    public static final String BASE_FOLDER_PATH = "2024/main/fr/nakaoni/aoc";
+    public static final String BASE_FOLDER_PATH = "main/fr/nakaoni/aoc";
 
     public static void main(String[] args) {
         try {

@@ -69,20 +69,14 @@ public class Day02 implements DayResponse {
         int sum = 0;
 
         for (String line: input.toList()) {
-            Set<Integer> safePositive = new HashSet<>(3);
-            safePositive.add(1);
-            safePositive.add(2);
-            safePositive.add(3);
-            Set<Integer> safeNegative = new HashSet<>(3);
-            safeNegative.add(-1);
-            safeNegative.add(-2);
-            safeNegative.add(-3);
+            Set<Integer> safePositive = new HashSet<>(List.of(1, 2, 3));
+            Set<Integer> safeNegative = new HashSet<>(List.of(-1, -2, -3));
 
             String[] list = line.split(" ");
 
             int len = list.length;
             if (len == 0) {
-                throw new Exception(String.format("List is empty", len));
+                throw new Exception("List is empty");
             }
 
             int[] numbers = new int[len];
@@ -110,64 +104,70 @@ public class Day02 implements DayResponse {
         int sum = 0;
 
         for (String line: input.toList()) {
-            boolean passedFirstCheck = true;
-            boolean passedSecondCheck = true;
-            boolean alreadyHadBadLevel = false;
-            Level currentState = Level.INITIALIZED;
-
             String[] list = line.split(" ");
 
             int len = list.length;
-            if (len == 0) {
-                throw new Exception(String.format("List is empty", len));
+            List<Integer> row = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                row.add(Integer.parseInt(list[i]));
             }
 
-            List<Integer> numbers = new ArrayList<>(len);
-            numbers.add(Integer.parseInt(list[0]));
-            for (int i = 1; i < len; i++) {
-                int currentNumber = Integer.parseInt(list[i]);
+            if (isSafe(row)) {
+               sum++;
+               continue;
+            }
 
-                passedFirstCheck = checkDiffBetweenTwoAdjacent(currentNumber, numbers.get(numbers.size() - 1));
-
-                if (!passedFirstCheck) {
-                    if (alreadyHadBadLevel) {
-                        break;
+            List<List<Integer>> listToTest = new ArrayList<>();
+            int indexToRemove = 0;
+            while (indexToRemove < len) {
+                List<Integer> innerList = new ArrayList<>();
+                for (int i = 0; i < len; i++) {
+                    if (i == indexToRemove) {
+                        continue;
                     }
 
-                    alreadyHadBadLevel = true;
-                    // reset 1st fail
-                    passedFirstCheck = true;
-                    continue;
+                    innerList.add(row.get(i));
                 }
-
-                Level state = getLevelBetweenTwoAdjacent(numbers.get(numbers.size() - 1), currentNumber);
-                if (currentState.compareTo(Level.INITIALIZED) == 0) {
-                    currentState = state;
-                }
-
-                passedSecondCheck = currentState.equals(state);
-                if (!passedSecondCheck) {
-                    if (alreadyHadBadLevel) {
-                        break;
-                    }
-
-                    alreadyHadBadLevel = true;
-                    // reset 1st fail
-                    passedSecondCheck = true;
-                    continue;
-                }
-
-                numbers.add(currentNumber);
+                listToTest.add(innerList);
+                indexToRemove++;
             }
 
-            if (!passedFirstCheck || !passedSecondCheck) {
-                continue;
+            for (List<Integer> l: listToTest) {
+                if (isSafe(l)) {
+                    sum++;
+                    break;
+                }
             }
-
-            sum++;
         }
 
         return String.valueOf(sum);
+    }
+
+    private boolean isSafe(List<Integer> list) throws Exception
+    {
+        Set<Integer> safePositive = new HashSet<>(List.of(1, 2, 3));
+        Set<Integer> safeNegative = new HashSet<>(List.of(-1, -2, -3));
+
+        int len = list.size();
+        if (len == 0) {
+            return false;
+        }
+
+        int[] numbers = new int[len];
+        numbers[0] = list.get(0);
+        for (int i = 1; i < len; i++) {
+            int currentNumber = list.get(i);
+            numbers[i] = currentNumber;
+
+            safePositive.add(currentNumber - numbers[i - 1]);
+            safeNegative.add(currentNumber - numbers[i - 1]);
+        }
+
+        if (safePositive.size() > 3 && safeNegative.size() > 3) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
