@@ -18,5 +18,30 @@ Stack:
 ### Settings
 
 - Classpath:
-    - 2024/main
-    - 2024/test
+    - src/main/java
+    - src/test/java
+
+### Commands
+
+> For Windows, replace class path' separator is ";" instead of ":"
+
+#### See the responses
+
+```sh
+make
+```
+
+or 
+
+
+```sh
+make build
+make run
+```
+
+#### Run the tests
+
+
+```sh
+make build_test
+make test

@@ -21,8 +21,8 @@ run: build
 	java -cp $(TARGET_DIR) $(PACKAGE).$(CLASS)
 
 build_test: build
-	javac $(OPTIONS) -d $(TARGET_DIR) --target $(VERSION) -cp "$(TARGET_DIR);$(LIB_DIR)" $(TEST_CLASS_PATH)/$(PACKAGE_AS_PATH)/*.java
-	javac $(OPTIONS) -d $(TARGET_DIR) --target $(VERSION) -cp "$(TARGET_DIR);$(LIB_DIR)" $(TEST_CLASS_PATH)/$(PACKAGE_AS_PATH)/**/*.java
+	javac $(OPTIONS) -d $(TARGET_DIR) --target $(VERSION) -cp "$(TARGET_DIR):$(LIB_DIR)" $(TEST_CLASS_PATH)/$(PACKAGE_AS_PATH)/*.java
+	javac $(OPTIONS) -d $(TARGET_DIR) --target $(VERSION) -cp "$(TARGET_DIR):$(LIB_DIR)" $(TEST_CLASS_PATH)/$(PACKAGE_AS_PATH)/**/*.java
 
 test: build build_test
-	java -cp "$(TARGET_DIR);$(LIB_DIR)" org.junit.platform.console.ConsoleLauncher execute --scan-classpath $(TARGET_DIR)
+	java -cp "$(TARGET_DIR):$(LIB_DIR)" org.junit.platform.console.ConsoleLauncher execute --scan-classpath $(TARGET_DIR)
