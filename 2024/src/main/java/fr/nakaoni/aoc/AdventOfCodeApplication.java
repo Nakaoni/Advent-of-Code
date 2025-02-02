@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import fr.nakaoni.aoc.day01.Day01;
 import fr.nakaoni.aoc.day02.Day02;
 import fr.nakaoni.aoc.day03.Day03;
+import fr.nakaoni.aoc.day04.Day04;
 import fr.nakaoni.aoc.utils.AOCReader;
 
 public class AdventOfCodeApplication {
@@ -27,6 +28,10 @@ public class AdventOfCodeApplication {
             DayResponse day03 = new Day03();
             printResponse(day03.getClass().getSimpleName(), day03.getPart1Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day03/input.txt"))));
             printResponse(day03.getClass().getSimpleName(), day03.getPart2Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day03/input.txt"))));
+
+            DayResponse day04 = new Day04();
+            printResponse(day04.getClass().getSimpleName(), day04.getPart1Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day04/input.txt"))));
+            printResponse(day04.getClass().getSimpleName(), day04.getPart2Response(AOCReader.read(Paths.get(BASE_FOLDER_PATH, "day04/input.txt"))));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
