@@ -28,7 +28,7 @@ public class Day04Test {
 
     @Test
     public void testPart2Response() throws Exception {
-        String expected = "";
+        String expected = "9";
 
         Stream<String> input = AOCReader.read(Paths.get(AdventOfCodeApplicationTest.BASE_TEST_FOLDER_PATH, EXAMPLE_FILE_PATH));
 
