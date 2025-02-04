@@ -117,19 +117,19 @@ public class Day04 implements DayResponse {
         int numberOfColumns = matrix[0].length;
 
         /**
-         *         M   M      M   S       S   S       S   M
-         *           A          A           A           A
-         *         S   S      M   S       M   M       S   M
-         * M = [[ -1, -1 ], [ -1, -1 ], [ -1,  1 ], [  1,  1 ]]
-         * M = [[  1, -1 ], [ -1,  1 ], [  1,  1 ], [  1, -1 ]]
-         * S = [[ -1,  1 ], [  1, -1 ], [ -1, -1 ], [ -1, -1 ]]
-         * S = [[  1,  1 ], [  1,  1 ], [  1, -1 ], [ -1,  1 ]]
+         * M M M S S S S M
+         * A A A A
+         * S S M S M M S M
+         * M = [[ -1, -1 ], [ -1, -1 ], [ -1, 1 ], [ 1, 1 ]]
+         * M = [[ 1, -1 ], [ -1, 1 ], [ 1, 1 ], [ 1, -1 ]]
+         * S = [[ -1, 1 ], [ 1, -1 ], [ -1, -1 ], [ -1, -1 ]]
+         * S = [[ 1, 1 ], [ 1, 1 ], [ 1, -1 ], [ -1, 1 ]]
          */
         Point[][] xMas = {
-            { new Point(-1, -1), new Point(-1, -1), new Point(-1, 1), new Point(1, 1) },
-            { new Point(1, -1), new Point(-1, 1), new Point(1, 1), new Point(1, -1) },
-            { new Point(-1, 1), new Point(1, -1), new Point(-1, -1), new Point(-1, -1) },
-            { new Point(1, 1), new Point(1, 1), new Point(1, -1), new Point(-1, 1) },
+                { new Point(-1, -1), new Point(-1, -1), new Point(-1, 1), new Point(1, 1) },
+                { new Point(1, -1), new Point(-1, 1), new Point(1, 1), new Point(1, -1) },
+                { new Point(-1, 1), new Point(1, -1), new Point(-1, -1), new Point(-1, -1) },
+                { new Point(1, 1), new Point(1, 1), new Point(1, -1), new Point(-1, 1) },
         };
 
         for (int i = 1; i < numberOfRows - 1; i++) {
@@ -139,12 +139,10 @@ public class Day04 implements DayResponse {
                     continue;
                 }
 
-                if (
-                    isXmas(matrix, new Point(i, j), xMas[0][0], xMas[1][0], xMas[2][0], xMas[3][0]) ||
-                    isXmas(matrix, new Point(i, j), xMas[0][1], xMas[1][1], xMas[2][1], xMas[3][1]) ||
-                    isXmas(matrix, new Point(i, j), xMas[0][2], xMas[1][2], xMas[2][2], xMas[3][2]) ||
-                    isXmas(matrix, new Point(i, j), xMas[0][3], xMas[1][3], xMas[2][3], xMas[3][3])
-                ) {
+                if (isXmas(matrix, new Point(i, j), xMas[0][0], xMas[1][0], xMas[2][0], xMas[3][0]) ||
+                        isXmas(matrix, new Point(i, j), xMas[0][1], xMas[1][1], xMas[2][1], xMas[3][1]) ||
+                        isXmas(matrix, new Point(i, j), xMas[0][2], xMas[1][2], xMas[2][2], xMas[3][2]) ||
+                        isXmas(matrix, new Point(i, j), xMas[0][3], xMas[1][3], xMas[2][3], xMas[3][3])) {
                     sum++;
                 }
             }
@@ -154,29 +152,28 @@ public class Day04 implements DayResponse {
     }
 
     private boolean isXmas(
-        char[][] matrix,
-        Point currentPoint,
-        Point mFirstPoint,
-        Point mSecondPoint,
-        Point sFirstPoint,
-        Point sSecondPoint
-    ) {
-        if ('M' != matrix[currentPoint.x - mFirstPoint.x][ currentPoint.y - mFirstPoint.y]) {
+            char[][] matrix,
+            Point currentPoint,
+            Point mFirstPoint,
+            Point mSecondPoint,
+            Point sFirstPoint,
+            Point sSecondPoint) {
+        if ('M' != matrix[currentPoint.x - mFirstPoint.x][currentPoint.y - mFirstPoint.y]) {
             return false;
         }
 
-        if ('M' != matrix[currentPoint.x - mSecondPoint.x][ currentPoint.y - mSecondPoint.y]) {
+        if ('M' != matrix[currentPoint.x - mSecondPoint.x][currentPoint.y - mSecondPoint.y]) {
             return false;
         }
 
-        if ('S' != matrix[currentPoint.x - sFirstPoint.x][ currentPoint.y - sFirstPoint.y]) {
+        if ('S' != matrix[currentPoint.x - sFirstPoint.x][currentPoint.y - sFirstPoint.y]) {
             return false;
         }
 
-        if ('S' != matrix[currentPoint.x - sSecondPoint.x][ currentPoint.y - sSecondPoint.y]) {
+        if ('S' != matrix[currentPoint.x - sSecondPoint.x][currentPoint.y - sSecondPoint.y]) {
             return false;
         }
-        
+
         return true;
     }
 }
