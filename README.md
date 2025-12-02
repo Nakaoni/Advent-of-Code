@@ -45,3 +45,27 @@ make run
 ```sh
 make build_test
 make test
+
+## 2025
+
+This year, let's continue to work with GO !
+
+#### See the responses
+
+```sh
+make
+```
+
+or 
+
+
+```sh
+make build
+make run
+```
+
+#### Run the tests
+
+
+```sh
+make test
