@@ -23,11 +23,10 @@ func GetPassword(r io.Reader) int {
 	for scanner.Scan() {
 		text := scanner.Text()
 		direction, distance := getInstruction(text)
-		currentPosition = computePosition(currentPosition, direction, distance)
+		newPosition, count := computePosition(currentPosition, direction, distance)
 
-		if currentPosition == LEFT_BORDER {
-			sum++
-		}
+		currentPosition = newPosition
+		sum += count
 	}
 
 	return sum
@@ -53,20 +52,30 @@ func getInstruction(s string) (direction string, distance int) {
 	return direction, distance
 }
 
-func computePosition(currentPosition int, direction string, distance int) (newPosition int) {
-	if direction == LEFT {
-		currentPosition -= distance
-	} else {
-		currentPosition += distance
-	}
+func computePosition(currentPosition int, direction string, distance int) (newPosition, count int) {
+	remaining := distance
 
-	for currentPosition < LEFT_BORDER || currentPosition > RIGHT_BORDER {
-		if currentPosition < LEFT_BORDER {
-			currentPosition = RIGHT_BORDER + currentPosition + 1
-		} else if currentPosition > RIGHT_BORDER {
-			currentPosition = currentPosition - RIGHT_BORDER - 1
+	for remaining > 0 {
+		if direction == LEFT {
+			currentPosition--
+		} else {
+			currentPosition++
 		}
+
+		if currentPosition == LEFT_BORDER-1 {
+			currentPosition = RIGHT_BORDER
+		}
+
+		if currentPosition == RIGHT_BORDER+1 {
+			currentPosition = LEFT_BORDER
+		}
+
+		if currentPosition == LEFT_BORDER {
+			count++
+		}
+
+		remaining--
 	}
 
-	return currentPosition
+	return currentPosition, count
 }

@@ -17,7 +17,7 @@ L99
 R14
 L82`)
 
-	want := 3
+	want := 6
 	got := GetPassword(input)
 
 	if got != want {
