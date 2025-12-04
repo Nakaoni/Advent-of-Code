@@ -57,8 +57,25 @@ func getRange(s string) (int, int) {
 func isInvalidId(number int) bool {
 	s := strconv.Itoa(number)
 
-	firstPart := s[:len(s)/2]
-	secondPart := s[len(s)/2:]
+	size := len(s)
+	for i := size / 2; i > 0; i-- {
+		splits := strings.Split(s, s[:i])
 
-	return firstPart == secondPart
+		if same(splits, func(a, b string) bool { return a == b }) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func same[E comparable](elements []E, f func(a E, b E) bool) bool {
+	el := elements[0]
+	for _, e := range elements {
+		if false == f(el, e) {
+			return false
+		}
+	}
+
+	return true
 }
