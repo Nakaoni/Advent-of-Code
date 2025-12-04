@@ -18,7 +18,7 @@ R14
 L82`)
 
 	want := 6
-	got := GetPassword(input)
+	got := GetOne(input)
 
 	if got != want {
 		t.Errorf("got %d, want %d", got, want)
