@@ -21,5 +21,5 @@ func main() {
 		log.Fatalf("Unable to open file %q", filePath)
 	}
 
-	fmt.Println("Answer: ", aoc.GetPassword(f))
+	fmt.Println("Answer: ", aoc.GetTwo(f))
 }

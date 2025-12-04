@@ -15,7 +15,7 @@ const (
 	RIGHT_BORDER = 99
 )
 
-func GetPassword(r io.Reader) int {
+func GetOne(r io.Reader) int {
 	sum := 0
 	currentPosition := 50
 
