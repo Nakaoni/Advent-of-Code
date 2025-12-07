@@ -47,6 +47,8 @@ func getPuzzleAnswer(day string) (func(io.Reader) int, error) {
 		fn = aoc.GetOne
 	case aoc.TWO:
 		fn = aoc.GetTwo
+	case aoc.THREE:
+		fn = aoc.GetThree
 	default:
 		return nil, errors.New("Unsupported day")
 	}
