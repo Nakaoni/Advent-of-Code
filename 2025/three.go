@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
-const THREE = "THREE"
+const (
+	THREE  = "THREE"
+	LENGTH = 12
+)
 
 func GetThree(input io.Reader) int {
 	sum := 0
@@ -23,49 +26,30 @@ func GetThree(input io.Reader) int {
 
 func getBank(s string) int {
 	size := len(s)
-	highestIndex := findHighestIndex(s)
+	toRemove := size - LENGTH
+	var stack []rune
 
-	var firstDigit byte
-	var secondDigit byte
-	if highestIndex < size-1 {
-		firstDigit = s[highestIndex]
-		s = s[highestIndex+1:]
-		secondDigit = s[findHighestIndex(s)]
-	} else {
-		secondDigit = s[highestIndex]
-		s = s[:highestIndex]
-		firstDigit = s[findHighestIndex(s)]
+	for _, b := range s {
+		for len(stack) > 0 && toRemove > 0 && stack[len(stack)-1] < b {
+			stack = stack[:len(stack)-1]
+			toRemove--
+		}
+		stack = append(stack, b)
 	}
 
+	if toRemove > 0 {
+		stack = stack[:len(stack)-toRemove]
+	}
+	result := stack[:LENGTH]
+
 	var stringBuilder strings.Builder
-	stringBuilder.WriteByte(firstDigit)
-	stringBuilder.WriteByte(secondDigit)
+	for _, r := range result {
+		stringBuilder.WriteRune(r)
+	}
 
 	bank, err := strconv.Atoi(stringBuilder.String())
 	if err != nil {
 		panic(err)
 	}
 	return bank
-}
-
-func findHighestIndex(s string) int {
-	highestIndex := 0
-	size := len(s)
-	for i := highestIndex + 1; i < size; i++ {
-		digit := convertToInt(string(s[i]))
-
-		if digit > convertToInt(string(s[highestIndex])) {
-			highestIndex = i
-		}
-	}
-
-	return highestIndex
-}
-
-func convertToInt(s string) int {
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		panic(err)
-	}
-	return i
 }
