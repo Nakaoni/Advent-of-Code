@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+const ONE = "ONE"
+
 const (
 	LEFT         = "L"
 	RIGHT        = "R"

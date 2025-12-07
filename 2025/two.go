@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+const TWO = "TWO"
+
 func GetTwo(input io.Reader) int {
 	sum := 0
 
