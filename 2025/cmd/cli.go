@@ -15,13 +15,18 @@ import (
 //go:embed inputs/*
 var inputs embed.FS
 
+var DayList = map[string]func(io.Reader) int{
+	strings.ToLower(aoc.ONE):   aoc.GetOne,
+	strings.ToLower(aoc.TWO):   aoc.GetTwo,
+	strings.ToLower(aoc.THREE): aoc.GetThree,
+}
+
 func main() {
 	args := os.Args
 
 	if len(args) < 2 {
-		bin := args[0]
-		fmt.Printf("Usage: %s [day]\n", bin)
-		fmt.Printf("Example: %s one\n", bin)
+		printHelp(args[0])
+		return
 	}
 
 	day := args[1]
@@ -40,18 +45,23 @@ func main() {
 }
 
 func getPuzzleAnswer(day string) (func(io.Reader) int, error) {
-	var fn func(io.Reader) int
-
-	switch strings.ToUpper(day) {
-	case aoc.ONE:
-		fn = aoc.GetOne
-	case aoc.TWO:
-		fn = aoc.GetTwo
-	case aoc.THREE:
-		fn = aoc.GetThree
-	default:
+	fn, ok := DayList[day]
+	if !ok {
 		return nil, errors.New("Unsupported day")
 	}
-
 	return fn, nil
+}
+
+func printHelp(bin string) {
+	fmt.Printf("Usage: %s [day]\n\n", bin)
+
+	fmt.Print("Available days: ")
+
+	keys := make([]string, 0)
+	for k := range DayList {
+		keys = append(keys, k)
+	}
+	fmt.Printf("%s\n\n", strings.Join(keys, ", "))
+
+	fmt.Printf("Example:\n%s one\n", bin)
 }

@@ -4,7 +4,7 @@ Repository containing the history of Advent of Code journey
 
 ## 2024
 
-The goal is to get familiar with Java. <br> 
+The goal is to get familiar with Java. <br>
 I have never really completely deep dive into it.
 I will take this AoC 2024 opportunity to, at least, use and (re)learn Java.
 
@@ -31,7 +31,7 @@ Stack:
 make
 ```
 
-or 
+or
 
 
 ```sh
@@ -45,27 +45,24 @@ make run
 ```sh
 make build_test
 make test
+```
 
 ## 2025
 
 This year, let's continue to work with GO !
 
-#### See the responses
+#### See the specific response
+
+> [!Note]
+> Part 1 is overrided by part 2. If you want to see the part 1 solution, refer to the commit
 
 ```sh
-make
-```
-
-or 
-
-
-```sh
-make build
-make run
+go build -o aoc cmd/cli.go
+./aoc [day]
 ```
 
 #### Run the tests
 
-
 ```sh
-make test
+go test aoc
+```
