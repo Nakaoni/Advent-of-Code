@@ -17,7 +17,7 @@ func TestStarFour(t *testing.T) {
 .@@@@@@@@.
 @.@.@@@.@.`)
 
-	want := 13
+	want := 43
 	got := GetFour(input)
 
 	if got != want {

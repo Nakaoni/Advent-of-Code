@@ -36,23 +36,34 @@ func GetFour(input io.Reader) int {
 		grid = append(grid, []rune(byteList))
 	}
 
-	for y := range grid {
-		for x := range grid[0] {
-			if isValid(grid, x, y) {
-				sum++
+	hasCanged := false
+	for {
+		hasCanged = false
+		for y := range grid {
+			for x := range grid[0] {
+				currentValue := grid[y][x]
+				if currentValue != '@' {
+					continue
+				}
+
+				count := countRemovable(grid, x, y)
+				if count < 4 {
+					sum++
+					grid[y][x] = '.'
+					hasCanged = true
+				}
 			}
+		}
+
+		if !hasCanged {
+			break
 		}
 	}
 
 	return sum
 }
 
-func isValid(grid [][]rune, posX, posY int) bool {
-	currentValue := grid[posY][posX]
-	if currentValue != '@' {
-		return false
-	}
-
+func countRemovable(grid [][]rune, posX, posY int) int {
 	count := 0
 	sizeLine := len(grid[0])
 	sizeGrid := len(grid)
@@ -72,5 +83,5 @@ func isValid(grid [][]rune, posX, posY int) bool {
 		}
 	}
 
-	return count < 4
+	return count
 }
