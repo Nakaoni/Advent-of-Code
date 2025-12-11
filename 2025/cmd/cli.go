@@ -21,6 +21,7 @@ var DayList = map[string]func(io.Reader) int{
 	strings.ToLower(aoc.THREE): aoc.GetThree,
 	strings.ToLower(aoc.FOUR):  aoc.GetFour,
 	strings.ToLower(aoc.FIVE):  aoc.GetFive,
+	strings.ToLower(aoc.SIX):   aoc.GetSix,
 }
 
 func main() {
