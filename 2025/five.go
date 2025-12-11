@@ -3,6 +3,7 @@ package aoc
 import (
 	"bufio"
 	"io"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -15,24 +16,33 @@ var ranges [][]int
 
 func GetFive(input io.Reader) int {
 	sum := 0
-	startInventory := false
 
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
 		text := scanner.Text()
 
 		if text == "" {
-			startInventory = true
-			continue
+			break
 		}
 
-		if startInventory {
-			if isFresh(text) {
-				sum++
-			}
-		} else {
-			addRanges(text)
+		addRanges(text)
+	}
+
+	sortRanges()
+
+	current := -1
+	for _, r := range ranges {
+		start := r[0]
+		end := r[1]
+
+		if current >= start {
+			start = current + 1
 		}
+		if start <= end {
+			sum += end - start + 1
+		}
+
+		current = max(current, end)
 	}
 
 	return sum
@@ -58,17 +68,11 @@ func addRanges(s string) {
 	ranges = append(ranges, []int{start, end})
 }
 
-func isFresh(s string) bool {
-	id, err := strconv.Atoi(s)
-	if err != nil {
-		panic(err)
-	}
-
-	for _, r := range ranges {
-		if id >= r[0] && id <= r[1] {
-			return true
+func sortRanges() {
+	slices.SortFunc(ranges, func(a []int, b []int) int {
+		if a[0] < b[0] {
+			return -1
 		}
-	}
-
-	return false
+		return 1
+	})
 }

@@ -18,7 +18,7 @@ func TestStarFive(t *testing.T) {
 17
 32`)
 
-	want := 3
+	want := 14
 	got := GetFive(input)
 
 	if got != want {
